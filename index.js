@@ -4,7 +4,7 @@ const fs = require("fs")
 const activeSongs = new Map();
 
 const client = new discord.Client();
-client.login(procress.env.token);
+client.login(process.env.token);
 client.commands = new discord.Collection()
 
 
