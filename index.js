@@ -2,6 +2,10 @@ const discord = require("discord.js");
 const botConfig = require("./botConfig.json")
 const fs = require("fs")
 const activeSongs = new Map();
+const activities_list = [
+    "/help", 
+    "music",
+    ];
 
 const client = new discord.Client();
 client.login(process.env.token);
@@ -32,7 +36,10 @@ fs.readdir("./commands/", (err, files) => {
 
 client.on('ready', async () => {
     console.log(`Im vibin with my music`);
-    client.user.setActivity("Music", { type: "LISTENING"})
+    setInterval(() => {
+        const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
+        bot.user.setActivity(activities_list[index]); // sets bot's activities to one of the phrases in the arraylist.
+    }, 10000);
 });
 
 client.on("message", async message =>{
