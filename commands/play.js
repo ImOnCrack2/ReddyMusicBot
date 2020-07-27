@@ -87,9 +87,9 @@ function Finish(client, ops, dispatcher){
 
         ops.active.delete(dispatcher.guildID);
 
-        var urMom = client.guilds.cache.get(dispatcher.guildID).me.voice.channel;
+        var voiceChannel = client.guilds.cache.get(dispatcher.guildID).me.voice.channel;
 
-        if(urMom) urMom.leave()
+        if(voiceChannel) voiceChannel.leave();
     }
 }
 
