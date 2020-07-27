@@ -4,7 +4,7 @@ const fs = require("fs")
 const activeSongs = new Map();
 const activities_list = [
     "/help", 
-    "music",
+    "Music"
     ];
 
 const client = new discord.Client();
