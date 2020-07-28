@@ -4,17 +4,16 @@ module.exports.run = async (client, message, args, options) => {
 
     var guildIDData = options.active.get(message.guild.id);
 
-    if(!guildIDData) return message.channel.send("No music is playing at the moment.")
+    if (!guildIDData) return message.channel.send("There is no music playing at the moment");
 
     var queue = guildIDData.queue;
     var nowPlaying = queue[0];
 
-    var response = `Now playing: ${nowPlaying.songTitle} | Requested by: ${nowPlaying.requester}\n queue: \n`;
+    var response = `Now playing: ${nowPlaying.songTitle} | Requested by: ${nowPlaying.requester} \n \n queue: \n`;
 
-    for (let index = 0; index < queue.lenght; index++) {
+    for (let index = 0; index < queue.length; index++) {
 
-        respone += `${index}, ${queue[index].songTitle} | Requested by: ${queue[index].requester}\n`;
-
+        response += `${index}, ${queue[index].songTitle} | Requested by: ${queue[index].requester}`;
     }
 
     message.channel.send(response);

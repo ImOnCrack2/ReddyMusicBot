@@ -42,6 +42,8 @@ client.on('ready', async () => {
     }, 10000);
 });
 
+
+
 client.on("message", async message =>{
 
     if(message.author.bot) return;

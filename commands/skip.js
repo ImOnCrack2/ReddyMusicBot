@@ -4,42 +4,40 @@ module.exports.run = async (client, message, args, options) => {
 
     var guildIDData = options.active.get(message.guild.id);
 
-    if(!guildIDData) return message.channel.send("No music is playing at the moment.");
+    if (!guildIDData) return message.channel.send("There is no music playing at the moment");
 
+    if(message.member.voice.channel != message.guild.me.voice.channel) return message.channel.send("Sorry, but ur not in the same channel as me.");
 
+    if(message.member.hasPermission("KICK_MEMBERS")){
 
-    if(message.member.voice.channel != message.guild.me.voice.channel) return message.channel.send("Sorry, but ur not in the same voice channel as me.");
-
-    if(message.member.hasPermission("KICK_MEMBERS")) {
-
-        message.channel.send("Going to the next song");
+        message.channel.send("Going to the next song...");
 
         return guildIDData.dispatcher.emit("finish");
 
-        
+
     }
 
     var amountUsers = message.member.voice.channel.members.size;
 
-    var amountSkip = Math.ceil(amountUsers / 2);
+    var amountSkips = Math.ceil(amountUsers / 2);
 
-   if(!guildIDData.queue[0].voteSkips) guildIDData.queue[0].voteSkips = [];
+    if(!guildIDData.queue[0].voteSkips) guildIDData.queue[0].voteSkips = [];
 
-   if(guildIDData.queue[0].voteSkips.includes(message.mmeber.id)) message.channel.send("Sorry, but u already skipped.");
+    if(guildIDData.queue[0].voteSkips.includes(message.member.id)) return message.channel.send("Sorry, u already skipped once.");
 
-   guildIDData.queue[0].voteSkips.push(message.member.id);
-   options.active.set(message.guild.id, guildIDData);
+    guildIDData.queue[0].voteSkips.push(message.member.id);
+    options.active.set(message.guild.id, guildIDData);
 
-   if(guildIDData.queue[0].voteSkips.client >= amountSkip) {
-       message.channel.send("Going to the next song");
+    if(guildIDData.queue[0].voteSkips.length >= amountSkips){
+        message.channel.send("Going to the next song...");
 
-       return guildIDData.dispatcher.emit("finish");
+        return guildIDData.dispatcher.emit("finish");
+    }
 
-   }
+    message.channel.send(`Added from skip request: ${guildIDData.queue[0].voteSkips.length}/${amountSkips}`);
 
-   message.channel.send(`Added from skip request: ${guildIDData.queue[0].voteSkips.lenght}/${amountSkip}`);
+
 }
-
 
 module.exports.help = {
     name: "skip"
