@@ -8,7 +8,11 @@ module.exports.run = async (client, message, args) => {
 
     if(message.guild.me.voice.channel) return message.channel.send("Sorry, but im already in a voice channel.");
 
-    message.guild.me.voice.channel.join();
+    var channelVoice = client.guilds.cache.get(dispatcher.guildID).me.voice.channel;
+
+    var channelVoice = client.guilds.me.voice.channel;
+
+    if(channelVoice) channelVoice.join();
     message.channel.send(":thumbsup: Joined voice channel.");
 
 }
