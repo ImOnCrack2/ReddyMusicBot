@@ -69,3 +69,29 @@ client.on("message", async message =>{
     if(commands) commands.run(client, message, args, options);
 
 });
+
+
+let defaultChannel = "";
+guild.channels.forEach((channel) => {
+  if(channel.type == "text" && defaultChannel == "") {
+    if(channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+      defaultChannel = channel;
+    }
+  }
+})
+
+client.on('guildCreate', guild => {
+
+
+
+    var joinEmbed = new discord.MessageEmbed()
+    .setTitle("Thanks for inviting me :smile:")
+    .setDescription(`Yooo, wassup djs, My name is ReddyMusic and thanks for inviting me! \n Use /help to get a list of commands \n \n My maker is: JustReddy#7397, for problems, dm him \n Well, im gonna chill and listen to some music! use /play (yturl) to wake me up \n \n **ENJOY THE POWER OF MY MUSIC BOI**`)
+    .setFooter(`© JustReddy 2020, for questions contact JustReddy#7397 on discord`)
+    .setTimestamp();
+    
+    
+    defaultChannel.send(joinEmbed);
+
+
+});
