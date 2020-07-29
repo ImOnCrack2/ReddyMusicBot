@@ -59,6 +59,8 @@ client.on("message", async message =>{
 
     var args = messageArray.slice(1);
 
+
+
     var options = {
         active: activeSongs
     };
@@ -70,7 +72,7 @@ client.on("message", async message =>{
 
 });
 
-
+var guild = discord.Guild;
 let defaultChannel = "";
 guild.channels.forEach((channel) => {
   if(channel.type == "text" && defaultChannel == "") {
