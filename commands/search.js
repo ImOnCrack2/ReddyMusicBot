@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args, ops) => {
     search(args.join(" "), function (res){
 
 
-        var vids = res.vids.slice(0,10);
+        var vids = res.vids.slice(0,10)
 
         var response = "";
 
