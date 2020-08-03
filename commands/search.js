@@ -2,9 +2,8 @@ const discord = require("discord.js");
 const search = require("yt-search");
 module.exports.run = async (client, message, args, ops) => {
 
-    search(args.join(" "), function (err, res){
+    search(args.join(" "), function (res){
 
-        if(err) return message.channel.send("Something went wrong");
 
         var vids = res.videos.slice(0,10);
 
