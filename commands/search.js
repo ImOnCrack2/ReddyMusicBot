@@ -43,5 +43,5 @@ module.exports.run = async (client, message, args, ops) => {
 }
 
 module.exports.help = {
-    name: "hallo"
+    name: "search"
 }
